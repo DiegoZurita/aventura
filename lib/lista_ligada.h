@@ -9,16 +9,3 @@ typedef struct elo {
 typedef struct {
     Elo* cabec;
 } Lista;
-
-
-
-//Interface das funções
-Lista cria();
-
-void destroi(Lista);
-
-Lista insere(Lista, Elemento*);
-
-Elemento* busca(Lista l, char*);
-
-Elemento* retira(Lista, Elemento*);
