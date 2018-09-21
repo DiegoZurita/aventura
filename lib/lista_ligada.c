@@ -1,7 +1,9 @@
 #include "lista_ligada.h"
+#include <stdlib.h>
+#include <string.h>
 
 
-Lista cria() 
+Lista* cria() 
 {
     Elo* cabeca = (Elo*) malloc(sizeof(Elo));
     cabeca->next = NULL;
@@ -24,7 +26,7 @@ void destroi(Lista lista)
     }
 };
 
-Lista insere(Lista lista, Elemento* el)
+Lista insere(Lista lista, Elemento* valor)
 {
     Elo* corrente = lista.cabec;
 
@@ -33,7 +35,7 @@ Lista insere(Lista lista, Elemento* el)
         corrente = corrente->next;
     }
 
-    corrente->next = el;
+    corrente->val = valor;
 
     return lista;
 };
@@ -62,17 +64,17 @@ Elemento* busca(Lista lista, char* valor)
     return encontrado;
 };
 
-Elemento* retira(Lista lista, Elemento* el) {
+Elemento* retira(Lista lista, Elemento* valor) {
 
     Elo* corrente = lista.cabec;   
     Elo* anterior = NULL;
 
-    while (strcmp(corrente->val->n, valor) != 0) {
+    while (strcmp(corrente->val->n, valor->n) != 0) {
         anterior = corrente;
         corrente = corrente->next;
     }
 
     anterior->next = corrente->next;
 
-    return corrente;
+    return corrente->val;
 };
