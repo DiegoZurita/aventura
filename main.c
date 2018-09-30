@@ -7,15 +7,17 @@
 
 int main (int argc, char** argv) {
 
-    printf("Testando a tabela de espalhamento.\n");
-    TabSim* t = cria(10);
-
-    printf("Criando elementos para o teste.\n");
+    printf("Criando elementos comuns para o teste.\n");
     Elemento* e1 = (Elemento*)malloc(sizeof(Elemento*));
     strcpy(e1->n, "e1");
 
     Elemento* e2 = (Elemento*)malloc(sizeof(Elemento*));
     strcpy(e2->n, "e2");    
+
+    printf("\n");
+
+    printf("Testando a tabela de espalhamento.\n");
+    TabSim* t = cria(10);
 
     printf("Inserindo os elementos criados.\n");
     if (insere(t, "e1", e1) != 0) {
@@ -27,7 +29,12 @@ int main (int argc, char** argv) {
 
     printf("Buscando um elemento.\n");
     Elemento* buscado = busca(t, "e1");
-    printf("Exibindo o valor do elemento buscado: %s\n", buscado->n);
+
+    if (buscado != NULL) {
+        printf("Exibindo o valor do elemento buscado: %s\n", buscado->n);
+    } else {
+        printf("O ELEMENTO BUSCADO NÃO EXISTE!");
+    }
 
     printf("Retirando um elemento.\n");
     if (retira(t, "e1") != 0) {
