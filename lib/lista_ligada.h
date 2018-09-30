@@ -9,3 +9,13 @@ typedef struct elo {
 typedef struct {
     Elo* cabec;
 } Lista;
+
+Lista* criaListaLigada();
+
+void destroiListaLigada(Lista lista);
+
+Lista insereListaLigada(Lista lista, Elemento* valor);
+
+Elemento* buscaListaLigada(Lista lista, char* valor);
+
+Elemento* retiraListaLigada(Lista lista, Elemento* valor);

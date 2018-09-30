@@ -3,7 +3,7 @@
 #include <string.h>
 
 
-Lista* cria() 
+Lista* criaListaLigada() 
 {
     Elo* cabeca = (Elo*) malloc(sizeof(Elo));
     cabeca->next = NULL;
@@ -15,7 +15,7 @@ Lista* cria()
     return lista;
 };
 
-void destroi(Lista lista)
+void destroiListaLigada(Lista lista)
 {
     Elo* corrente = lista.cabec;
 
@@ -26,7 +26,7 @@ void destroi(Lista lista)
     }
 };
 
-Lista insere(Lista lista, Elemento* valor)
+Lista insereListaLigada(Lista lista, Elemento* valor)
 {
     Elo* corrente = lista.cabec;
 
@@ -40,7 +40,7 @@ Lista insere(Lista lista, Elemento* valor)
     return lista;
 };
 
-Elemento* busca(Lista lista, char* valor)
+Elemento* buscaListaLigada(Lista lista, char* valor)
 {
     Elo* corrente = lista.cabec;   
     Elemento* encontrado = NULL;
@@ -64,7 +64,7 @@ Elemento* busca(Lista lista, char* valor)
     return encontrado;
 };
 
-Elemento* retira(Lista lista, Elemento* valor) {
+Elemento* retiraListaLigada(Lista lista, Elemento* valor) {
 
     Elo* corrente = lista.cabec;   
     Elo* anterior = NULL;
