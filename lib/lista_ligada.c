@@ -3,14 +3,13 @@
 #include <stdio.h>
 #include <string.h>
 
-
 Lista* criaListaLigada() 
 {
-    Elo* cabeca = (Elo*) malloc(sizeof(Elo));
+    Elo* cabeca = (Elo*) malloc(sizeof(Elo*));
     cabeca->next = NULL;
     cabeca->val = NULL;
 
-    Lista* lista = (Lista*) malloc(sizeof(Lista));
+    Lista* lista = (Lista*) malloc(sizeof(Lista*));
     lista->cabec = cabeca;
 
     return lista;
