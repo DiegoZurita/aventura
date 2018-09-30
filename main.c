@@ -45,6 +45,32 @@ int main (int argc, char** argv) {
     destroi(t);
 
     printf("Terminei de testar a tabela de espalhamento.\n");
+    
+    printf("\n");
+
+    printf("Testando a lista ligada.\n");
+    Lista* l = criaListaLigada();
+
+    printf("Inserindo elementos.\n");
+    insereListaLigada(l, e1);
+    insereListaLigada(l, e2);
+
+    printf("Buscando elementos.\n");
+    Elemento* buscadoListaLigada = buscaListaLigada(l, "e1");
+
+    if (buscadoListaLigada != NULL) {
+        printf("Exibindo o valor do elemento buscado: %s\n", buscadoListaLigada->n);
+    } else {
+        printf("O ELEMENTO BUSCADO NÃO EXISTE!\n");
+    }
+
+    printf("Retirando um elemento.\n");
+    retiraListaLigada(l, e1);
+
+    printf("Destruindo a lista ligada.\n");
+    destroiListaLigada(l);
+
+    printf("Terminei de testar a lista ligada.\n");
 
     return 0;
 }
