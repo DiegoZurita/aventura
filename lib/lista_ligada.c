@@ -1,5 +1,6 @@
 #include "lista_ligada.h"
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 
 
@@ -15,9 +16,9 @@ Lista* criaListaLigada()
     return lista;
 };
 
-void destroiListaLigada(Lista lista)
+void destroiListaLigada(Lista* lista)
 {
-    Elo* corrente = lista.cabec;
+    Elo* corrente = lista->cabec;
 
     while (corrente->next != NULL) {
         Elo* temp = corrente->next;
@@ -26,47 +27,46 @@ void destroiListaLigada(Lista lista)
     }
 };
 
-Lista insereListaLigada(Lista lista, Elemento* valor)
+Lista* insereListaLigada(Lista* lista, Elemento* valor)
 {
-    Elo* corrente = lista.cabec;
+    Elo* corrente = lista->cabec;
+    
+    if (corrente->val == NULL && corrente->next == NULL) {
+        corrente->val = valor;
+        return lista;
+    }
+    
+    Elo* novaCorrente = (Elo*) malloc(sizeof(Elo*));
 
     while (corrente->next != NULL)
     {
         corrente = corrente->next;
     }
 
-    corrente->val = valor;
+    novaCorrente->val = valor;
+    novaCorrente->next = NULL;
+    corrente->next = novaCorrente;
 
     return lista;
 };
 
-Elemento* buscaListaLigada(Lista lista, char* valor)
+Elemento* buscaListaLigada(Lista* lista, char* valor)
 {
-    Elo* corrente = lista.cabec;   
-    Elemento* encontrado = NULL;
+    Elo* corrente = lista->cabec;
 
-    while (corrente->val != NULL && strcmp(corrente->val->n, valor) != 0) {
-
-        if (corrente->next == NULL)
-        {
-            break;
-        }
-        else {
-            corrente = corrente->next;
-        }
+    while (corrente->val != NULL) {
+        if (strcmp(corrente->val->n, valor) == 0)
+            return corrente->val;
+        
+        corrente = corrente->next;
     }
 
-    if (corrente->val != NULL && strcmp(corrente->val->n, valor) == 0)
-    {
-        encontrado = corrente->val;
-    }
-
-    return encontrado;
+    return NULL;
 };
 
-Elemento* retiraListaLigada(Lista lista, Elemento* valor) {
-
-    Elo* corrente = lista.cabec;   
+Elemento* retiraListaLigada(Lista* lista, Elemento* valor) {
+    
+    Elo* corrente = lista->cabec;
     Elo* anterior = NULL;
 
     while (strcmp(corrente->val->n, valor->n) != 0) {
@@ -74,7 +74,12 @@ Elemento* retiraListaLigada(Lista lista, Elemento* valor) {
         corrente = corrente->next;
     }
 
-    anterior->next = corrente->next;
+    if (anterior != NULL) {
+        anterior->next = corrente->next;
+    }
+    else {
+        lista->cabec = corrente->next;
+    }
 
     return corrente->val;
 };

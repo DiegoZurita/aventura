@@ -12,10 +12,10 @@ typedef struct {
 
 Lista* criaListaLigada();
 
-void destroiListaLigada(Lista lista);
+void destroiListaLigada(Lista* lista);
 
-Lista insereListaLigada(Lista lista, Elemento* valor);
+Lista* insereListaLigada(Lista* lista, Elemento* valor);
 
-Elemento* buscaListaLigada(Lista lista, char* valor);
+Elemento* buscaListaLigada(Lista* lista, char* valor);
 
-Elemento* retiraListaLigada(Lista lista, Elemento* valor);
+Elemento* retiraListaLigada(Lista* lista, Elemento* valor);
