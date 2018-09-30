@@ -26,7 +26,7 @@ Elemento* busca(TabSim* t, char* chave) {
     Ligacao* temp = ligacao;
 
     while(ligacao) {
-        if (strcmp(temp->chave, chave)) {
+        if (strcmp(temp->chave, chave) == 0) {
             return temp->valor;
         }
         temp = temp->proximo;
@@ -50,7 +50,7 @@ int retira(TabSim* t, char* chave) {
     Ligacao* ligacao = t->lista[indice];
 
     while(ligacao) {
-        if (strcmp(ligacao->chave, chave)) {
+        if (strcmp(ligacao->chave, chave) == 0) {
             ligacao = NULL;
             return 0;
         }
@@ -68,7 +68,7 @@ int insere(TabSim* t, char* chave, Elemento* valor) {
 
     // Verifica se a chave já está contida
     while(temp) {
-        if (strcmp(temp->chave, chave)) {
+        if (strcmp(temp->chave, chave) == 0) {
             return 1;
         }
 
