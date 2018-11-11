@@ -9,10 +9,10 @@ int main (int argc, char** argv) {
 
     printf("Criando elementos comuns para o teste.\n");
     Elemento* e1 = (Elemento*)malloc(sizeof(Elemento*));
-    strcpy(e1->n, "e1");
+    strcpy(e1->nome, "e1");
 
     Elemento* e2 = (Elemento*)malloc(sizeof(Elemento*));
-    strcpy(e2->n, "e2");    
+    strcpy(e2->nome, "e2");
 
     printf("\n");
 
@@ -31,7 +31,7 @@ int main (int argc, char** argv) {
     Elemento* buscado = busca(t, "e1");
 
     if (buscado != NULL) {
-        printf("Exibindo o valor do elemento buscado: %s\n", buscado->n);
+        printf("Exibindo o valor do elemento buscado: %s\n", buscado->nome);
     } else {
         printf("O ELEMENTO BUSCADO NÃO EXISTE!");
     }
@@ -59,7 +59,7 @@ int main (int argc, char** argv) {
     Elemento* buscadoListaLigada = buscaListaLigada(l, "e1");
 
     if (buscadoListaLigada != NULL) {
-        printf("Exibindo o valor do elemento buscado: %s\n", buscadoListaLigada->n);
+        printf("Exibindo o valor do elemento buscado: %s\n", buscadoListaLigada->nome);
     } else {
         printf("O ELEMENTO BUSCADO NÃO EXISTE!\n");
     }
