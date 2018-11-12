@@ -4,18 +4,21 @@
 
 #include "lib/lista_ligada.h"
 #include "lib/tabela_espalhamento.h"
+#include "lib/aventureiro.h"
+#include "lib/objeto.h"
 
 int main (int argc, char** argv) {
 
     printf("Criando elementos comuns para o teste.\n");
     Elemento* e1 = (Elemento*)malloc(sizeof(Elemento*));
-    strcpy(e1->nome, "e1");
+    e1->nome = "e1";
 
     Elemento* e2 = (Elemento*)malloc(sizeof(Elemento*));
-    strcpy(e2->nome, "e2");
+    e2->nome = "e2";
 
     printf("\n");
 
+    // Tabela de espalhamento
     printf("Testando a tabela de espalhamento.\n");
     TabSim* t = cria(10);
 
@@ -48,6 +51,7 @@ int main (int argc, char** argv) {
     
     printf("\n");
 
+    // Lista ligada
     printf("Testando a lista ligada.\n");
     Lista* l = criaListaLigada();
 
@@ -71,6 +75,65 @@ int main (int argc, char** argv) {
     destroiListaLigada(l);
 
     printf("Terminei de testar a lista ligada.\n");
+
+    printf("\n");
+
+    // Aventureiro
+    printf("Testando o aventureiro.\n");
+    Aventureiro* avent = (Aventureiro*)malloc(sizeof(Aventureiro*));
+    printf("Destruindo o aventureiro.\n");
+    free(avent);
+    printf("Terminei de testar o aventureiro.\n");
+
+    printf("\n");
+
+    // Objeto
+    printf("Testando a struct objeto.\n");
+    Objeto* obj = (Objeto*)malloc(sizeof(Objeto*));
+    printf("Destruindo a struct objeto.\n");
+    free(obj);
+    printf("Terminei de testar a struct objeto.\n");    
+
+    printf("\n");
+
+    // Lugar
+    printf("Testando a struct lugar.\n");
+    Lugar** lugares = (Lugar**)malloc(3 * sizeof(Lugar**));
+    for (int i = 0; i < 3; i++) {
+        lugares[i] = (Lugar*)malloc(sizeof(Lugar*));
+    }
+
+    printf("Destruindo a struct lugares.\n");
+    for (int i = 0; i < 3; i++) {
+        free(lugares[i]);
+    }
+    free(lugares);
+
+    printf("Terminei de testar a struct lugar.\n");
+
+    printf("\n");
+
+    // Elemento
+    printf("Testando a struct elemento.\n");
+    Elemento* elem = (Elemento*)malloc(sizeof(Elemento*));
+
+    printf("Atribuindo valores aos atributos da struct elemento.\n");
+
+    elem->nome = "Muchacho da Silva";
+    elem->longa = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut leo nec lacus condimentum faucibus vitae vel massa. Proin in nibh quam. Morbi eu sem ut orci ullamcorper posuere.";
+    elem->curta = "Lorem ipsum dolor sit amet";
+    elem->ativo = true;
+    elem->visivel = true;
+    elem->conhecido = false;
+    elem->conteudo = NULL;
+    // TODO: Testar os métodos acoes, animacao e a union detalhe.
+
+    printf("Destruindo a struct elemento.\n");
+    free(elem);
+
+    printf("Terminei de testar a struct elemento.\n");
+
+    printf("\n");
 
     return 0;
 }
