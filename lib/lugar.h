@@ -1,11 +1,13 @@
 #ifndef LUGAR_H
 #define LUGAR_H
 
-// Inspirado na resposta https://stackoverflow.com/a/3988056
-typedef struct Lugar Lugar;
+#include "elemento.h"
 
-struct Lugar {
-    Lugar** saidas;
-};
+// Inspirado na resposta https://stackoverflow.com/a/888431
+struct lugar;
+
+typedef struct lugar {
+    struct elemento** saidas;
+} Lugar;
 
 #endif

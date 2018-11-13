@@ -5,12 +5,17 @@
 #include "objeto.h"
 #include "lugar.h"
 
-typedef struct {
-    char* nome;
+// Inspirado na resposta https://stackoverflow.com/a/3988056
+struct elemento;
 
-    char* longa;
+typedef struct Elemento Elemento;
 
-    char* curta;
+struct Elemento {
+    char nome[20];
+
+    char longa[300];
+
+    char curta[30];
 
     bool ativo;
 
@@ -18,16 +23,17 @@ typedef struct {
 
     bool conhecido;
 
-    Objeto* conteudo;
+    Elemento** conteudo;
 
-    void (**acoes)();
+    int (**acoes)(Elemento* e1, Elemento* e2);
 
     void (*animacao)();
 
     union {
-        Lugar* lugar;
+        // Inspirado na resposta https://stackoverflow.com/a/888431
+        struct lugar* lugar;
         Objeto* objeto;
     } detalhe;
 
-} Elemento;
+};
 #endif
