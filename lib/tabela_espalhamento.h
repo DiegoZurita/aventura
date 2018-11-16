@@ -1,3 +1,6 @@
+#ifndef TABELA_ESPALHAMENTO_H
+#define TABELA_ESPALHAMENTO_H
+
 #include "elemento.h"
 
 // Estrutura de dados
@@ -25,3 +28,4 @@ int retira(TabSim* t, char* chave);
 
 // Funções relacionadas ao algoritmo de hash
 int espalhamento(char* chave, int tamanhoTabela);
+#endif

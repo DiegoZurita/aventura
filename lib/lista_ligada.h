@@ -1,3 +1,6 @@
+#ifndef LISTA_LIGADA_H
+#define LISTA_LIGADA_H
+
 #include "elemento.h"
 
 //Definições das estruturas
@@ -19,3 +22,4 @@ Lista* insereListaLigada(Lista* lista, Elemento* valor);
 Elemento* buscaListaLigada(Lista* lista, char* valor);
 
 Elemento* retiraListaLigada(Lista* lista, Elemento* valor);
+#endif

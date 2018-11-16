@@ -2,75 +2,80 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "lib/lista_ligada.h"
-#include "lib/tabela_espalhamento.h"
+#include "lib/lugar.h"
+#include "lib/elemento.h"
 
-int main (int argc, char** argv) {
+int main() {
+    // Introdução inicial da história.
+    printf("Créditos: Rafaella, Diego e Ayran.\n\n");
+    printf("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent "
+    "vel aliquam leo, non scelerisque nisi. Nullam hendrerit mauris in facilisis "
+    "feugiat. Fusce ut imperdiet lacus. Cras convallis non erat nec tempor. Nam "
+    "dignissim et libero sed viverra. Ut efficitur nec tortor vitae posuere. "
+    "Mauris quam urna, molestie eu lorem non, ornare venenatis magna. Nulla "
+    "aliquam lectus ut nibh pulvinar, at facilisis magna congue. Phasellus "
+    "suscipit dictum est aliquam ultricies. Fusce et mi eget ipsum sodales "
+    "finibus. Nulla aliquam tempor erat quis gravida. Suspendisse vel lorem "
+    "neque. Proin sagittis felis eu nulla viverra tincidunt. Nunc ultricies "
+    "rutrum velit, sit amet ultrices odio ultrices sit amet. Proin ultrices "
+    "dolor a enim imperdiet pulvinar.\n\n Duis viverra elit eu eros maximus "
+    "tempor. Proin sagittis laoreet nisi et varius. Sed condimentum, nunc a "
+    "mollis molestie, erat tellus pellentesque risus, a aliquet arcu metus "
+    "non mi. Curabitur hendrerit nunc est, eu cursus libero feugiat quis. "
+    "Suspendisse ullamcorper molestie nibh a tincidunt. Vivamus sed lectus "
+    "magna. Nam sit amet risus velit. Morbi sit amet condimentum dui. Donec "
+    "nec risus eros. Phasellus placerat, tortor eget convallis mattis, metus dolor "
+    "luctus mauris, id sollicitudin mauris erat ac lorem.\n");
 
-    printf("Criando elementos comuns para o teste.\n");
-    Elemento* e1 = (Elemento*)malloc(sizeof(Elemento*));
-    strcpy(e1->n, "e1");
+    // Inicialização de variáveis importantes.
+    Elemento* aventureiro = (Elemento*)malloc(sizeof(Elemento*)); // O aventureiro é um elemento especial.
+    strcpy(aventureiro->nome, "Aventureiro");
 
-    Elemento* e2 = (Elemento*)malloc(sizeof(Elemento*));
-    strcpy(e2->n, "e2");    
+    Elemento** salas = (Elemento**)malloc(5 * sizeof(Elemento**));
 
-    printf("\n");
+    // Cria 5 salas com 3 objetos cada ligadas umas nas outras em linha reta.
+    for (int i = 0; i < 5; i++) {
+        salas[i] = (Elemento*)malloc(sizeof(Elemento*));
+        snprintf(salas[i]->nome, sizeof("Sala %d"), "Sala %d", i);
 
-    printf("Testando a tabela de espalhamento.\n");
-    TabSim* t = cria(10);
+        sprintf(salas[i]->curta, "Curta %d", i);
 
-    printf("Inserindo os elementos criados.\n");
-    if (insere(t, "e1", e1) != 0) {
-        printf("PRIMEIRO ELEMENTO NÂO FOI INSERIDO!\n");
+        sprintf(salas[i]->longa, "Longa %d", i);
+
+        salas[i]->ativo = true;
+        salas[i]->visivel = true;
+
+        Lugar* lugar = (Lugar*)malloc(sizeof(Lugar*));
+
+        if (i > 0) {
+            lugar->saidas = (struct elemento**)malloc(sizeof(struct elemento**));
+            lugar->saidas[0] = (struct elemento*)salas[i-1];
+
+            salas[i]->conhecido =false;
+        } else {
+            lugar->saidas = NULL;
+            salas[i]->conhecido = true;
+        }
+
+        salas[i]->detalhe.lugar = lugar;
+
+        Elemento** objetosNaSala = (Elemento**)malloc(3 * sizeof(Elemento**));
+        for (int j = 0; j < 3; j++) {
+            if (i == 0 && j == 0) {
+                objetosNaSala[j] = aventureiro;
+            } else {
+                Elemento* obj = (Elemento*)malloc(sizeof(Elemento*));
+                sprintf(obj->nome, "%d/%d", j, i);
+                obj->detalhe.objeto = (Objeto*)malloc(sizeof(Objeto*));
+                objetosNaSala[j] = obj;
+            }
+        }
     }
-    if (insere(t, "e2", e2) != 0) {
-        printf("SEGUNDO ELEMENTO NÂO FOI INSERIDO!\n");
-    }
 
-    printf("Buscando um elemento.\n");
-    Elemento* buscado = busca(t, "e1");
+    char* comando = (char*)malloc(30 * sizeof(char*));
 
-    if (buscado != NULL) {
-        printf("Exibindo o valor do elemento buscado: %s\n", buscado->n);
-    } else {
-        printf("O ELEMENTO BUSCADO NÃO EXISTE!");
-    }
+    do {
+        scanf("%s", comando);
+    } while (strcmp(comando, "sair") != 0);
 
-    printf("Retirando um elemento.\n");
-    if (retira(t, "e1") != 0) {
-        printf("PRIMEIRO ELEMENTO NÂO FOI REMOVIDO!\n");
-    }
-
-    printf("Destruindo a tabela de espalhamento.\n");
-    destroi(t);
-
-    printf("Terminei de testar a tabela de espalhamento.\n");
-    
-    printf("\n");
-
-    printf("Testando a lista ligada.\n");
-    Lista* l = criaListaLigada();
-
-    printf("Inserindo elementos.\n");
-    insereListaLigada(l, e1);
-    insereListaLigada(l, e2);
-
-    printf("Buscando elementos.\n");
-    Elemento* buscadoListaLigada = buscaListaLigada(l, "e1");
-
-    if (buscadoListaLigada != NULL) {
-        printf("Exibindo o valor do elemento buscado: %s\n", buscadoListaLigada->n);
-    } else {
-        printf("O ELEMENTO BUSCADO NÃO EXISTE!\n");
-    }
-
-    printf("Retirando um elemento.\n");
-    retiraListaLigada(l, e1);
-
-    printf("Destruindo a lista ligada.\n");
-    destroiListaLigada(l);
-
-    printf("Terminei de testar a lista ligada.\n");
-
-    return 0;
 }

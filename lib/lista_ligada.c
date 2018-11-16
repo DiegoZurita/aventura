@@ -54,7 +54,7 @@ Elemento* buscaListaLigada(Lista* lista, char* valor)
     Elo* corrente = lista->cabec;
 
     while (corrente->val != NULL) {
-        if (strcmp(corrente->val->n, valor) == 0)
+        if (strcmp(corrente->val->nome, valor) == 0)
             return corrente->val;
         
         corrente = corrente->next;
@@ -68,7 +68,7 @@ Elemento* retiraListaLigada(Lista* lista, Elemento* valor) {
     Elo* corrente = lista->cabec;
     Elo* anterior = NULL;
 
-    while (strcmp(corrente->val->n, valor->n) != 0) {
+    while (strcmp(corrente->val->nome, valor->nome) != 0) {
         anterior = corrente;
         corrente = corrente->next;
     }
