@@ -4,10 +4,11 @@
 #include "elemento.h"
 
 // Inspirado na resposta https://stackoverflow.com/a/888431
-struct lugar;
-
 typedef struct lugar {
-    struct elemento** saidas;
+    struct elemento* norte;
+    struct elemento* sul;
+    struct elemento* leste;
+    struct elemento* oeste;
 } Lugar;
 
 #endif

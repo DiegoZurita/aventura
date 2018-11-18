@@ -6,16 +6,15 @@
 #include "lugar.h"
 
 // Inspirado na resposta https://stackoverflow.com/a/3988056
-struct elemento;
 
-typedef struct Elemento Elemento;
+typedef struct elemento Elemento;
 
-struct Elemento {
+struct elemento {
     char nome[20];
 
     char longa[300];
 
-    char curta[30];
+    char curta[100];
 
     bool ativo;
 
@@ -24,16 +23,17 @@ struct Elemento {
     bool conhecido;
 
     Elemento** conteudo;
-
+ 
     int (**acoes)(Elemento* e1, Elemento* e2);
 
     void (*animacao)();
 
     union {
         // Inspirado na resposta https://stackoverflow.com/a/888431
-        struct lugar* lugar;
+        struct lugar* saidas;
         Objeto* objeto;
     } detalhe;
 
+    bool ehLugar;
 };
 #endif
