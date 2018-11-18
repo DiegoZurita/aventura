@@ -150,5 +150,5 @@ int main() {
         iteracoes++;
     }
 
-    printf("Acabou o jogo!\n")
+    printf("Acabou o jogo!\n");
 }
