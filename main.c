@@ -132,6 +132,8 @@ int main() {
     //Rodando "engine" do jogo
     printf("Breve introdução da historia\n");
 
+    printf("Olá %s, vc esta em: ", aventureiro->nome);
+
     Elemento* salaAtual = salaInicio;
     int iteracoes = 0;
 
