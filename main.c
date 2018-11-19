@@ -26,6 +26,7 @@ void exibeDescricaoApropriada(Elemento* salaAtual) {
 }
 
 int main() {
+    printf("Créditos para Rafaella, Diego e Ayran.\n\n");
     // Criando aventureiro
     Elemento* aventureiro = (Elemento*)malloc(sizeof(Elemento*)); // O aventureiro é um elemento especial.
     strcpy(aventureiro->nome, "Rei Agamemnon");
