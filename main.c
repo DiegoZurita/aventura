@@ -6,7 +6,6 @@
 #include "lib/elemento.h"
 #include "lib/lista_ligada.h"
 
-
 void executaAnimacoes(Lista* listaDeElementosAnimados) {
     Elo* curElementoAnimado = listaDeElementosAnimados->cabec;
 
@@ -23,6 +22,14 @@ void exibeDescricaoApropriada(Elemento* salaAtual) {
     else {
         printf("%s\n", salaAtual->longa);
     }
+}
+
+void animacaoSala3() {
+    printf("Animação sala 3\n");
+}
+
+void animacaoSala4() {
+    printf("Animação sala 4\n");
 }
 
 int main() {
@@ -91,10 +98,6 @@ int main() {
     sala3->detalhe.saidas->leste = NULL;
     sala3->detalhe.saidas->oeste = NULL;
 
-    void animacaoSala3() {
-        printf("Animação sala 3\n");
-    }
-
     sala3->animacao = animacaoSala3;
 
     //Criando primeira sala
@@ -111,11 +114,6 @@ int main() {
     sala4->detalhe.saidas->sul = NULL;
     sala4->detalhe.saidas->leste = NULL;
     sala4->detalhe.saidas->oeste = NULL;
-
-    void animacaoSala4() 
-    {
-        printf("Animação sala 4\n");
-    }
 
     sala4->animacao = animacaoSala4;    
 
