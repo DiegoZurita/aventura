@@ -6,7 +6,6 @@
 #include "lib/elemento.h"
 #include "lib/lista_ligada.h"
 
-
 void executaAnimacoes(Lista* listaDeElementosAnimados) {
     Elo* curElementoAnimado = listaDeElementosAnimados->cabec;
 
@@ -37,7 +36,17 @@ void exibeDescricaoApropriada(Elemento* salaAtual) {
     }
 }
 
+void animacaoSala3() {
+    printf("~~~ Ventania ~~~~\n");
+}
+
+void animacaoSala4() {
+    printf("**** Calor ****\n");
+}
+
 int main() {
+    printf("Créditos para Rafaella, Diego e Ayran.\n\n");
+    
     // Criando aventureiro
     Elemento* aventureiro = (Elemento*)malloc(sizeof(Elemento*)); // O aventureiro é um elemento especial.
     strcpy(aventureiro->nome, "Rei Agamemnon");
@@ -158,10 +167,6 @@ int main() {
     sala3->detalhe.saidas->direcoes[3] = NULL;
     sala3->conteudo = NULL;
 
-    void animacaoSala3() {
-        printf("~~~ Ventania ~~~~\n");
-    }
-
     sala3->animacao = animacaoSala3;
 
     //Criando sala 4
@@ -180,11 +185,6 @@ int main() {
     sala4->detalhe.saidas->direcoes[2] = NULL;
     sala4->detalhe.saidas->direcoes[3] = NULL;
     sala4->conteudo = NULL;
-
-    void animacaoSala4() 
-    {
-        printf("**** Calor ****\n");
-    }
 
     sala4->animacao = animacaoSala4;    
 
