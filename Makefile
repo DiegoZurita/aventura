@@ -13,3 +13,5 @@ clean:
 	rm -f *.h.gch
 	rm -f lib/*.out
 	rm -f lib/*.h.gch
+	rm -f main
+	rm -f teste
