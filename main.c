@@ -40,10 +40,11 @@ int main() {
     salaInicio->ehLugar = false;
     salaInicio->ativo = true;
     salaInicio->detalhe.saidas = (Lugar*)malloc(sizeof(Lugar));
-    salaInicio->detalhe.saidas->norte = NULL;
-    salaInicio->detalhe.saidas->sul = NULL;
-    salaInicio->detalhe.saidas->leste = NULL;
-    salaInicio->detalhe.saidas->oeste = NULL;
+    salaInicio->detalhe.saidas->direcoes = (Elemento**) malloc(4 * sizeof(Elemento));
+    salaInicio->detalhe.saidas->direcoes[0] = NULL;
+    salaInicio->detalhe.saidas->direcoes[1] = NULL;
+    salaInicio->detalhe.saidas->direcoes[2] = NULL;
+    salaInicio->detalhe.saidas->direcoes[3] = NULL;
 
     //Criando primeira sala
     Elemento* sala1 = (Elemento*) malloc(sizeof(Elemento));
@@ -55,10 +56,11 @@ int main() {
     sala1->ehLugar = false;
     sala1->ativo = true;
     sala1->detalhe.saidas = (Lugar*)malloc(sizeof(Lugar));
-    sala1->detalhe.saidas->norte = NULL;
-    sala1->detalhe.saidas->sul = NULL;
-    sala1->detalhe.saidas->leste = NULL;
-    sala1->detalhe.saidas->oeste = NULL;
+    sala1->detalhe.saidas->direcoes = (Elemento**) malloc(4 * sizeof(Elemento));
+    sala1->detalhe.saidas->direcoes[0] = NULL;
+    sala1->detalhe.saidas->direcoes[1] = NULL;
+    sala1->detalhe.saidas->direcoes[2] = NULL;
+    sala1->detalhe.saidas->direcoes[3] = NULL;
 
     //Criando segunda sala
     Elemento* sala2 = (Elemento*) malloc(sizeof(Elemento));
@@ -70,10 +72,11 @@ int main() {
     sala2->ehLugar = false;
     sala2->ativo = true;
     sala2->detalhe.saidas = (Lugar*)malloc(sizeof(Lugar));
-    sala2->detalhe.saidas->norte = NULL;
-    sala2->detalhe.saidas->sul = NULL;
-    sala2->detalhe.saidas->leste = NULL;
-    sala2->detalhe.saidas->oeste = NULL;
+    sala2->detalhe.saidas->direcoes = (Elemento**) malloc(4 * sizeof(Elemento));
+    sala2->detalhe.saidas->direcoes[0] = NULL;
+    sala2->detalhe.saidas->direcoes[1] = NULL;
+    sala2->detalhe.saidas->direcoes[2] = NULL;
+    sala2->detalhe.saidas->direcoes[3] = NULL;
 
     //Criando primeira sala
     Elemento* sala3 = (Elemento*) malloc(sizeof(Elemento));
@@ -85,10 +88,11 @@ int main() {
     sala3->ehLugar = false;
     sala3->ativo = true;
     sala3->detalhe.saidas = (Lugar*)malloc(sizeof(Lugar));
-    sala3->detalhe.saidas->norte = NULL;
-    sala3->detalhe.saidas->sul = NULL;
-    sala3->detalhe.saidas->leste = NULL;
-    sala3->detalhe.saidas->oeste = NULL;
+    sala3->detalhe.saidas->direcoes = (Elemento**) malloc(4 * sizeof(Elemento));
+    sala3->detalhe.saidas->direcoes[0] = NULL;
+    sala3->detalhe.saidas->direcoes[1] = NULL;
+    sala3->detalhe.saidas->direcoes[2] = NULL;
+    sala3->detalhe.saidas->direcoes[3] = NULL;
 
     void animacaoSala3() {
         printf("Animação sala 3\n");
@@ -106,10 +110,11 @@ int main() {
     sala4->ehLugar = false;
     sala4->ativo = true;
     sala4->detalhe.saidas = (Lugar*)malloc(sizeof(Lugar));
-    sala4->detalhe.saidas->norte = NULL;
-    sala4->detalhe.saidas->sul = NULL;
-    sala4->detalhe.saidas->leste = NULL;
-    sala4->detalhe.saidas->oeste = NULL;
+    sala4->detalhe.saidas->direcoes = (Elemento**) malloc(4 * sizeof(Elemento));
+    sala4->detalhe.saidas->direcoes[0] = NULL;
+    sala4->detalhe.saidas->direcoes[1] = NULL;
+    sala4->detalhe.saidas->direcoes[2] = NULL;
+    sala4->detalhe.saidas->direcoes[3] = NULL;
 
     void animacaoSala4() 
     {
@@ -124,10 +129,10 @@ int main() {
     insereListaLigada(listaDeElementosAnimados, sala3);
 
     //Conectando salas
-    salaInicio->detalhe.saidas->norte = sala1;
-    sala1->detalhe.saidas->norte = sala2;
-    sala2->detalhe.saidas->norte = sala3;
-    sala3->detalhe.saidas->norte = sala4;
+    salaInicio->detalhe.saidas->direcoes[0] = sala1;
+    sala1->detalhe.saidas->direcoes[0] = sala2;
+    sala2->detalhe.saidas->direcoes[0] = sala3;
+    sala3->detalhe.saidas->direcoes[0] = sala4;
 
     //Rodando "engine" do jogo
     printf("Breve introdução da historia\n");
@@ -141,7 +146,7 @@ int main() {
         exibeDescricaoApropriada(salaAtual);
 
         if (iteracoes % 2 == 1) {   
-            salaAtual = salaAtual->detalhe.saidas->norte;
+            salaAtual = salaAtual->detalhe.saidas->direcoes[0];
         }
         else {
             salaAtual->conhecido = true;
