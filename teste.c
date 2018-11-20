@@ -105,7 +105,7 @@ int main() {
 
     // Elemento
     printf("Testando a struct elemento.\n");
-    Elemento* elem = (Elemento*)malloc(sizeof(Elemento*));
+    Elemento* elem = (Elemento*)malloc(sizeof(Elemento));
 
     printf("Atribuindo valores aos atributos da struct elemento.\n");
 
