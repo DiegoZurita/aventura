@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include "objeto.h"
 #include "lugar.h"
+#include "lista_ligada.h"
 
 // Inspirado na resposta https://stackoverflow.com/a/3988056
 
@@ -22,7 +23,9 @@ struct elemento {
 
     bool conhecido;
 
-    Elemento** conteudo;
+    struct lista* conteudo;
+
+    char artigo[10];
  
     int (**acoes)(Elemento* e1, Elemento* e2);
 

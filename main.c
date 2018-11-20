@@ -16,6 +16,18 @@ void executaAnimacoes(Lista* listaDeElementosAnimados) {
     }
 }
 
+void exibeObjetos(Elemento* sala) {
+    if (sala->conteudo == NULL) return; 
+
+    printf("Objetos na sala:\n");
+
+    Elo* currObjeto = sala->conteudo->cabec;    
+    while(currObjeto != NULL) {
+        printf("- %s %s\n", currObjeto->val->artigo, currObjeto->val->nome);
+        currObjeto = currObjeto->next;
+    }
+}
+
 void exibeDescricaoApropriada(Elemento* salaAtual) {
     if (salaAtual->conhecido) {
         printf("%s\n", salaAtual->curta);
@@ -37,7 +49,7 @@ int main() {
     strcpy(salaInicio->curta, "Qual das opções??");
     salaInicio->visivel = true;
     salaInicio->conhecido = false;
-    salaInicio->ehLugar = false;
+    salaInicio->ehLugar = true;
     salaInicio->ativo = true;
     salaInicio->detalhe.saidas = (Lugar*)malloc(sizeof(Lugar));
     salaInicio->detalhe.saidas->direcoes = (Elemento**) malloc(4 * sizeof(Elemento));
@@ -45,6 +57,31 @@ int main() {
     salaInicio->detalhe.saidas->direcoes[1] = NULL;
     salaInicio->detalhe.saidas->direcoes[2] = NULL;
     salaInicio->detalhe.saidas->direcoes[3] = NULL;
+    salaInicio->conteudo = criaListaLigada();
+
+    Elemento* ouro = (Elemento*) malloc(sizeof(Elemento));
+    strcpy(ouro->nome, "Ouro");
+    strcpy(ouro->artigo, "Um");
+    strcpy(ouro->longa, "Ouro raro que venho das monstanhas do Everest!");
+    strcpy(ouro->curta, "Ouro raro!");
+    ouro->visivel = true;
+    ouro->conhecido = false;
+    ouro->ehLugar = false;
+    ouro->ativo = true;
+
+
+    Elemento* espada = (Elemento*) malloc(sizeof(Elemento));
+    strcpy(espada->nome, "Espada");
+    strcpy(espada->artigo, "Uma");
+    strcpy(espada->longa, "Espada ocultada das nevoas que nunca soube o que é uma derrota.");
+    strcpy(espada->curta, "Espada oculta");
+    espada->visivel = true;
+    espada->conhecido = false;
+    espada->ehLugar = false;
+    espada->ativo = true;
+
+    insereListaLigada(salaInicio->conteudo, ouro);
+    insereListaLigada(salaInicio->conteudo, espada);
 
     //Criando primeira sala
     Elemento* sala1 = (Elemento*) malloc(sizeof(Elemento));
@@ -53,7 +90,7 @@ int main() {
     strcpy(sala1->curta, "Cede ou recusa?");
     sala1->visivel = true;
     sala1->conhecido = false;
-    sala1->ehLugar = false;
+    sala1->ehLugar = true;
     sala1->ativo = true;
     sala1->detalhe.saidas = (Lugar*)malloc(sizeof(Lugar));
     sala1->detalhe.saidas->direcoes = (Elemento**) malloc(4 * sizeof(Elemento));
@@ -61,6 +98,18 @@ int main() {
     sala1->detalhe.saidas->direcoes[1] = NULL;
     sala1->detalhe.saidas->direcoes[2] = NULL;
     sala1->detalhe.saidas->direcoes[3] = NULL;
+    sala1->conteudo = criaListaLigada();
+    Elemento* criseida = (Elemento*) malloc(sizeof(Elemento));
+    strcpy(criseida->nome, "Criseida");
+    strcpy(criseida->artigo, "A");
+    strcpy(criseida->longa, "Descrição longa");
+    strcpy(criseida->curta, "Descrição curta");
+    criseida->visivel = true;
+    criseida->conhecido = false;
+    criseida->ehLugar = false;
+    criseida->ativo = true;
+
+    insereListaLigada(sala1->conteudo, criseida);
 
     //Criando segunda sala
     Elemento* sala2 = (Elemento*) malloc(sizeof(Elemento));
@@ -69,7 +118,7 @@ int main() {
     strcpy(sala2->curta, "Cede ou enfrenta?");
     sala2->visivel = true;
     sala2->conhecido = false;
-    sala2->ehLugar = false;
+    sala2->ehLugar = true;
     sala2->ativo = true;
     sala2->detalhe.saidas = (Lugar*)malloc(sizeof(Lugar));
     sala2->detalhe.saidas->direcoes = (Elemento**) malloc(4 * sizeof(Elemento));
@@ -77,6 +126,20 @@ int main() {
     sala2->detalhe.saidas->direcoes[1] = NULL;
     sala2->detalhe.saidas->direcoes[2] = NULL;
     sala2->detalhe.saidas->direcoes[3] = NULL;
+    sala2->conteudo = criaListaLigada();
+
+    Elemento* carta = (Elemento*) malloc(sizeof(Elemento));
+    strcpy(carta->nome, "Carta de Apelo");
+    strcpy(carta->artigo, "Uma");
+    strcpy(carta->longa, "Descrição longa");
+    strcpy(carta->curta, "Descrição curta");
+    carta->visivel = true;
+    carta->conhecido = false;
+    carta->ehLugar = false;
+    carta->ativo = true;
+    
+    insereListaLigada(sala2->conteudo, carta);
+
 
     //Criando primeira sala
     Elemento* sala3 = (Elemento*) malloc(sizeof(Elemento));
@@ -85,7 +148,7 @@ int main() {
     strcpy(sala3->curta, "Ignora os apelos ou ouve as dúvidas?");
     sala3->visivel = true;
     sala3->conhecido = false;
-    sala3->ehLugar = false;
+    sala3->ehLugar = true;
     sala3->ativo = true;
     sala3->detalhe.saidas = (Lugar*)malloc(sizeof(Lugar));
     sala3->detalhe.saidas->direcoes = (Elemento**) malloc(4 * sizeof(Elemento));
@@ -93,6 +156,7 @@ int main() {
     sala3->detalhe.saidas->direcoes[1] = NULL;
     sala3->detalhe.saidas->direcoes[2] = NULL;
     sala3->detalhe.saidas->direcoes[3] = NULL;
+    sala3->conteudo = NULL;
 
     void animacaoSala3() {
         printf("~~~ Ventania ~~~~\n");
@@ -107,7 +171,7 @@ int main() {
     strcpy(sala4->curta, "Ignorar ou forçar?");
     sala4->visivel = true;
     sala4->conhecido = false;
-    sala4->ehLugar = false;
+    sala4->ehLugar = true;
     sala4->ativo = true;
     sala4->detalhe.saidas = (Lugar*)malloc(sizeof(Lugar));
     sala4->detalhe.saidas->direcoes = (Elemento**) malloc(4 * sizeof(Elemento));
@@ -115,6 +179,7 @@ int main() {
     sala4->detalhe.saidas->direcoes[1] = NULL;
     sala4->detalhe.saidas->direcoes[2] = NULL;
     sala4->detalhe.saidas->direcoes[3] = NULL;
+    sala4->conteudo = NULL;
 
     void animacaoSala4() 
     {
@@ -130,7 +195,7 @@ int main() {
     strcpy(sala5->curta, "Aceitar ou recusar?");
     sala5->visivel = true;
     sala5->conhecido = false;
-    sala5->ehLugar = false;
+    sala5->ehLugar = true;
     sala5->ativo = true;
     sala5->detalhe.saidas = (Lugar*)malloc(sizeof(Lugar));
     sala5->detalhe.saidas->direcoes = (Elemento**) malloc(4 * sizeof(Elemento));
@@ -138,6 +203,7 @@ int main() {
     sala5->detalhe.saidas->direcoes[1] = NULL;
     sala5->detalhe.saidas->direcoes[2] = NULL;
     sala5->detalhe.saidas->direcoes[3] = NULL;
+    sala5->conteudo = NULL;
 
 
     //Criando lista de salas e objetos animados
@@ -162,6 +228,9 @@ int main() {
 
     while (salaAtual != NULL) {
         exibeDescricaoApropriada(salaAtual);
+        printf("\n");
+        exibeObjetos(salaAtual);
+        printf("\n");
 
         if (iteracoes % 2 == 1) {   
             salaAtual = salaAtual->detalhe.saidas->direcoes[0];
@@ -170,8 +239,8 @@ int main() {
             salaAtual->conhecido = true;
         }
 
-        executaAnimacoes(listaDeElementosAnimados);
-        // printf("----- fim da iteracao %d ------\n", iteracoes);
+        printf("Animações:\n");
+        executaAnimacoes(listaDeElementosAnimados);        
         printf("\n\n");
         iteracoes++;
     }
