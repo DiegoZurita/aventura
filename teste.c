@@ -6,7 +6,7 @@
 #include "lib/tabela_espalhamento.h"
 #include "lib/objeto.h"
 
-void teste() {
+int main() {
 
     printf("Criando elementos comuns para o teste.\n");
     Elemento* e1 = (Elemento*)malloc(sizeof(Elemento*));
@@ -122,4 +122,5 @@ void teste() {
     free(elem);
 
     printf("Terminei de testar a struct elemento.\n");
+    return 0;
 }
