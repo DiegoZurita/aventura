@@ -5,10 +5,7 @@
 
 // Inspirado na resposta https://stackoverflow.com/a/888431
 typedef struct lugar {
-    struct elemento* norte;
-    struct elemento* sul;
-    struct elemento* leste;
-    struct elemento* oeste;
+    struct elemento** direcoes;
 } Lugar;
 
 #endif
