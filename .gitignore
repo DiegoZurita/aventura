@@ -1,0 +1,9 @@
+.vscode/
+avent
+avent.c
+avent.o
+avent.tab.h
+aventl.o
+coisas.o
+main.o
+symrec.o
