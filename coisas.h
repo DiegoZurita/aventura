@@ -21,15 +21,22 @@ struct elemento {
 
     char curta[100];
 
+    symrec *cont;
+    
+    int tipo;
+
+    union {
+      Objeto obj;
+      Lugar lug;
+    } Det;
+
     bool ativo;
 
     bool visivel;
 
     bool conhecido;
 
-    int tipo;
-
-    symrec *cont;
+    bool ehLugar;
 
     struct lista* conteudo;
 
@@ -38,13 +45,6 @@ struct elemento {
     int (**acoes)(Elemento* e1, Elemento* e2);
 
     void (*animacao)();
-
-    union {
-      Objeto obj;
-      Lugar lug;
-    } Det;
-
-    bool ehLugar;
 };
 
 /* Ponteiro para função */
