@@ -15,6 +15,12 @@ Elemento fogo    = {"Fogo",   "É uma chama quente e bruxuleante", "uma chama", 
 
 Elemento ouro = { "Ouro", "Ouro brilhante", "um ouro dourado", NULL, OBJ, .Det.obj={1,1} };
 
+Elemento criseida = { "Criseida", "Criseida Rara", "uma Criseida", NULL, OBJ, .Det.obj={1,1} };
+
+Elemento carta = { "Carta", "Carta de apelo", "uma carta", NULL, OBJ, .Det.obj={1,1} };
+
+Elemento corpo = { "Corpo", "Corpo de Heitor", "uma corpo", NULL, OBJ, .Det.obj={1,1} };
+
 /* Lugares */
 
 Elemento palacio_troia = {"Palacio Troia", "Palacio Troia", "Palacio Troia", NULL, LUGAR, .Det.lug.Saidas =  {NULL, NULL, NULL, NULL, NULL, NULL}};
@@ -226,7 +232,10 @@ symrec*  init_table(symrec *sym_table)
 
   /* Coloca os objetos nos lugares */
   assembleia.cont = putsym(assembleia.cont, "ouro", OBJ, &ouro);
-  campoDeBatalha.cont = putsym(campoDeBatalha.cont, "fogo", OBJ, &fogo);
+  assembleia.cont = putsym(assembleia.cont, "criseida", OBJ, &criseida);
+  campoDeBatalha.cont = putsym(campoDeBatalha.cont, "carta", OBJ, &carta);
+  acampamento_tracios.cont = putsym(acampamento_tracios.cont, "fogo", OBJ, &fogo);
+  tenda_aquiles.cont = putsym(tenda_aquiles.cont, "corpo", OBJ, &corpo);
 
   // Termina de ligar as salas
   assembleia.Det.lug.Saidas[1] = &tendaRei;
