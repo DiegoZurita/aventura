@@ -23,6 +23,10 @@ Elemento prova   = {"prova",  "Uma prova cheia de garranchos e de escrita insegu
 Elemento sala   = {"sala", "um pequeno escritório de trabalho", "sala pequena", NULL, LUGAR, .Det.lug.Saidas =  {NULL, NULL, NULL, NULL, NULL,NULL}};
 Elemento quarto = {"quarto", "um grande quarto bagunçado", "quarto enorme", NULL, LUGAR, .Det.lug.Saidas =  {NULL, NULL, &sala, NULL, &sala, NULL}};
 
+Elemento acampamento_tracios = {"Próximo ao acampamento dos trácios", "As batalhas continuam. Durante um confronto entre gregos e troianos, Aquiles entrenta Heitor, o melhor guerreiro de Troia, e vence. No entanto, Aquiles desonra o corpo de Heitor, o que provoca a fúria de Zeus. Novamente em um sonho, Zeus alerta Agamemnon sobre o desrespeito de Aquiles e exige a devolução do corpo de Heitor à Troia. Agamemnon avisa Aquiles, que, por sua vez, ignora o clamor de seu general.", "Acampamento dos trácios", NULL, LUGAR, .Det.lug.Saidas =  {NULL, NULL, NULL, NULL, NULL,NULL}};
+Elemento tenda_aquiles = {"Tenda de Aquiles", "Heitor é enterrado e a cidade de Troia está em luto. A batalha final aproxima-se. Os gregos conseguem invadir Troia. Agamemnon e Aquiles localizam Helena e Paris. Aquiles deseja duelar Paris, mas Helena intercede e diz que retornará a Menelau, irmão de Agamemnon, se a vida de Paris for poupada.", "Tenda de Aquiles", NULL, LUGAR, .Det.lug.Saidas =  {NULL, NULL, NULL, NULL, NULL, NULL}};
+Elemento palacio_troia = {"Palácio de Troia", "", "", NULL, LUGAR, .Det.lug.Saidas =  {NULL, NULL, NULL, NULL, NULL, NULL}};
+
 //
 // Funções auxiliares
 //
