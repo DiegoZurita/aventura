@@ -17,17 +17,17 @@ Elemento ouro = { "Ouro", "Ouro brilhante", "um ouro dourado", NULL, OBJ, .Det.o
 
 /* Lugares */
 
-Elemento palacio_troia = {"palacio_troia", "", "", NULL, LUGAR, .Det.lug.Saidas =  {NULL, NULL, NULL, NULL, NULL, NULL}};
+Elemento palacio_troia = {"Palacio Troia", "", "", NULL, LUGAR, .Det.lug.Saidas =  {NULL, NULL, NULL, NULL, NULL, NULL}};
 
-Elemento tenda_aquiles = {"tenda_aquiles", "Heitor é enterrado e a cidade de Troia está em luto. A batalha final aproxima-se. Os gregos conseguem invadir Troia. Agamemnon e Aquiles localizam Helena e Paris. Aquiles deseja duelar Paris, mas Helena intercede e diz que retornará a Menelau, irmão de Agamemnon, se a vida de Paris for poupada.", "Tenda de Aquiles", NULL, LUGAR, .Det.lug.Saidas =  {&palacio_troia, NULL, NULL, NULL, NULL, NULL}};
+Elemento tenda_aquiles = {"Tenda Aquiles", "Heitor é enterrado e a cidade de Troia está em luto. A batalha final aproxima-se. Os gregos conseguem invadir Troia. Agamemnon e Aquiles localizam Helena e Paris. Aquiles deseja duelar Paris, mas Helena intercede e diz que retornará a Menelau, irmão de Agamemnon, se a vida de Paris for poupada.", "Tenda de Aquiles", NULL, LUGAR, .Det.lug.Saidas =  {&palacio_troia, NULL, NULL, NULL, NULL, NULL}};
 
-Elemento acampamento_tracios = {"acampamento_tracios", "As batalhas continuam. Durante um confronto, o que provoca a fúria de Zeus..", "Acampamento dos trácios", NULL, LUGAR, .Det.lug.Saidas =  {&tenda_aquiles, NULL, NULL, NULL, NULL,NULL}};
+Elemento acampamento_tracios = {"Acampamento Tracios", "As batalhas continuam. Durante um confronto, o que provoca a fúria de Zeus..", "Acampamento dos trácios", NULL, LUGAR, .Det.lug.Saidas =  {&tenda_aquiles, NULL, NULL, NULL, NULL,NULL}};
 
-Elemento campoDeBatalha = {"campoDeBatalha", "Assembleia dos líderes do exército grego", "Assembleia dos líderes", NULL, LUGAR, .Det.lug.Saidas =  {&acampamento_tracios, NULL, NULL, NULL, NULL, NULL} };
+Elemento campoDeBatalha = {"Campo de Batalha", "Assembleia dos líderes do exército grego", "Assembleia dos líderes", NULL, LUGAR, .Det.lug.Saidas =  {&acampamento_tracios, NULL, NULL, NULL, NULL, NULL} };
 
-Elemento assembleia = { "assembleia", "Assembleia dos líderes do exército grego", "Assembleia dos líderes", NULL, LUGAR, .Det.lug.Saidas =  {&campoDeBatalha, NULL, NULL, NULL, NULL, NULL} };
+Elemento assembleia = { "Assembleia", "Assembleia dos líderes do exército grego", "Assembleia dos líderes", NULL, LUGAR, .Det.lug.Saidas =  {&campoDeBatalha, NULL, NULL, NULL, NULL, NULL} };
 
-Elemento tendaRei = { "tenda", "Tenda do rei Agamemnon", "Tenda do Rei", NULL, LUGAR, .Det.lug.Saidas = {&assembleia, NULL, NULL, NULL, NULL, NULL} };
+Elemento tendaRei = { "Tenda", "Tenda do rei Agamemnon", "Tenda do Rei", NULL, LUGAR, .Det.lug.Saidas = {&assembleia, NULL, NULL, NULL, NULL, NULL} };
 
 
 //
@@ -225,7 +225,12 @@ symrec*  init_table(symrec *sym_table)
     ptr = putsym(ptr, llugs[i].name, LUGAR,llugs[i].lug);
 
   /* Coloca os objetos nos lugares */
-  tendaRei.cont = putsym(tendaRei.cont, "ouro", OBJ, &ouro);
+  assembleia.cont = putsym(assembleia.cont, "ouro", OBJ, &ouro);
+  assembleia.Det.lug.Saidas[1] = &tendaRei;
+  campoDeBatalha.Det.lug.Saidas[1] = &assembleia;
+  acampamento_tracios.Det.lug.Saidas[1] = &campoDeBatalha;
+  tenda_aquiles.Det.lug.Saidas[1] = &acampamento_tracios;
+  palacio_troia.Det.lug.Saidas[1] = &tenda_aquiles;
 
   /* Ajustes finais */
   ouro.cont = putsym(ouro.cont,   "pegue", VERBO, Pegar);
