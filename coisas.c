@@ -185,6 +185,9 @@ struct initobj {
 struct initobj lobjs[] = {
   {"fogo",  &fogo},
   {"ouro", &ouro},
+  {"criseida", &criseida},
+  {"carta", &carta},
+  {"corpo", &corpo},
   { 0, 0 }
 };
 
