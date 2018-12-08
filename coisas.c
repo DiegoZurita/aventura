@@ -10,18 +10,25 @@ symrec *inventario = (symrec *) 0; /* material com o aventureiro */
 Elemento *Posic    = (Elemento *) 0; /* Posição atual */
 
 /* Objetos  */
+
 Elemento fogo    = {"fogo",   "É uma chama quente e bruxuleante", "uma chama", NULL, OBJ, .Det.obj={1,1}};
-Elemento gelo    = {"gelo",   "É um pedaço de gelo bem frio", "uma pedra de gelo", NULL, OBJ, .Det.obj={1, 1}};
-Elemento vapor   = {"vapor",   "Parece fumaça, dança ao vento", "simplesmente vapor", NULL, OBJ, .Det.obj={0,0}};
-Elemento lepre   = {"leprechaum", "Um leprechaum perdido, vindo da Irlanda, seu nome é Kirkpatrick", "um homenzinho mal encarado", NULL, OBJ, .Det.obj={ 1,1}};
-Elemento caneta  = {"caneta", "Uma caneta vermelha, ótima para corrigir provas", "uma caneta vermelha", NULL, OBJ, .Det.obj={0,0}};
-Elemento lapis   = {"lapis",  "Um lápis azul, não serve para muitas coisas", "um lapis azul", NULL, OBJ, .Det.obj={1,1}};
-Elemento hamster = {"hamster","Um roedor bonitinho, parece muito assustado.", "um hamster fofinho", NULL, OBJ, .Det.obj={1,1}};
-Elemento prova   = {"prova",  "Uma prova cheia de garranchos e de escrita insegura", "uma prova escrabosa", NULL, OBJ, .Det.obj={1,1}};
+
+Elemento ouro = { "Ouro", "Ouro brilhante", "um ouro dourado", NULL, OBJ, .Det.obj={1,1} };
 
 /* Lugares */
-Elemento sala   = {"sala", "um pequeno escritório de trabalho", "sala pequena", NULL, LUGAR, .Det.lug.Saidas =  {NULL, NULL, NULL, NULL, NULL,NULL}};
-Elemento quarto = {"quarto", "um grande quarto bagunçado", "quarto enorme", NULL, LUGAR, .Det.lug.Saidas =  {NULL, NULL, &sala, NULL, &sala, NULL}};
+
+Elemento palacio_troia = {"palacio_troia", "", "", NULL, LUGAR, .Det.lug.Saidas =  {NULL, NULL, NULL, NULL, NULL, NULL}};
+
+Elemento tenda_aquiles = {"tenda_aquiles", "Heitor é enterrado e a cidade de Troia está em luto. A batalha final aproxima-se. Os gregos conseguem invadir Troia. Agamemnon e Aquiles localizam Helena e Paris. Aquiles deseja duelar Paris, mas Helena intercede e diz que retornará a Menelau, irmão de Agamemnon, se a vida de Paris for poupada.", "Tenda de Aquiles", NULL, LUGAR, .Det.lug.Saidas =  {&palacio_troia, NULL, NULL, NULL, NULL, NULL}};
+
+Elemento acampamento_tracios = {"acampamento_tracios", "As batalhas continuam. Durante um confronto, o que provoca a fúria de Zeus..", "Acampamento dos trácios", NULL, LUGAR, .Det.lug.Saidas =  {&tenda_aquiles, NULL, NULL, NULL, NULL,NULL}};
+
+Elemento campoDeBatalha = {"campoDeBatalha", "Assembleia dos líderes do exército grego", "Assembleia dos líderes", NULL, LUGAR, .Det.lug.Saidas =  {&acampamento_tracios, NULL, NULL, NULL, NULL, NULL} };
+
+Elemento assembleia = { "assembleia", "Assembleia dos líderes do exército grego", "Assembleia dos líderes", NULL, LUGAR, .Det.lug.Saidas =  {&campoDeBatalha, NULL, NULL, NULL, NULL, NULL} };
+
+Elemento tendaRei = { "tenda", "Tenda do rei Agamemnon", "Tenda do Rei", NULL, LUGAR, .Det.lug.Saidas = {&assembleia, NULL, NULL, NULL, NULL, NULL} };
+
 
 //
 // Funções auxiliares
@@ -133,88 +140,11 @@ void Gritar(Elemento *o1, Elemento *o2){
   puts("YEEAAAAAOOOOOWWWGRRUWL");
 }
 
-/* Estas duas funções são mais sofisticadas, pois alteram outros elementos */
-void PegarGelo(Elemento *o1, Elemento *o2) {
-  if (presente("gelo")) { 
-	if (getsym(inventario, "fogo")) {
-	  inventario = popsym(inventario, "fogo");
-	  Posic->cont = popsym(Posic->cont, "gelo");
-	  Posic->cont = putsym(Posic->cont, "vapor", OBJ, &vapor);
-	  vapor.Det.obj = (Objeto) {1,1};
-	  puts("O gelo e o fogo se fundiram...");
-	  return;
-	}
-	else {
-	  puts("BRRRrr, que frio, mas eu aguento");
-	}
+void PegaOuro(Elemento *o1, Elemento *o2) {
+  if (presente("ouro")) { 
+    puts("Peguei o ouro!");
   }
-  Pegar(&gelo, NULL);
-}
-
-void PegarFogo(Elemento *o1, Elemento *o2) {
-  if (presente("fogo")) { 
-	if (getsym(inventario, "gelo")) {
-	  inventario = popsym(inventario, "gelo");
-	  Posic->cont = popsym(Posic->cont, "fogo");
-	  Posic->cont = putsym(Posic->cont, "vapor", OBJ, &vapor);
-	  vapor.Det.obj = (Objeto) {1,1};
-	  puts("O fogo e o gelo se fundiram...");
-	  return;
-	}
-	else {
-	  puts("UAU! AII! ARRGGHH! Que quente, mas eu aguento");
-	}
-  }
-  Pegar(&fogo, NULL);
-}
-
-/* exemplo comportamento especial */
-void PegarVapor(Elemento *o1, Elemento *o2) {
-  if (Visivel(o1))
-	puts("Não dá! É muito etéreo...");
-  else
-	Pegar(&vapor,NULL);
-}
-
-/* Libera mais um elemento */
-void JogarLeprechaum(Elemento *o1, Elemento *o2) {
-  puts("Kirkpatrick emite umas palavras impronunciáveis num jogo de respeito\n"
-	   "Algo como %@!#$@!&");
-  if (!Ativo(&caneta)) {
-	caneta.Det.obj = (Objeto) {1,1};
-	puts("Ele deixou cair alguma coisa!");
-  }
-  Largar(&lepre, NULL);
-}
-
-/* outro comportamento especial */
-void JogarHamster(Elemento *o1, Elemento *o2) {
-  printf("O %s se agarra desesperadamente a você e é impossível largá-lo!\n", o1->nome);
-}
-
-void Corrigir(Elemento *o1, Elemento *o2) {
-  int r;
-  if ((r = presente(o1->nome)))
-	puts("Dei-lhe uma dura!");
-  else printf("Corrigir o quê? Não vejo %s\n", o1->nome);
-}
-
-void CorrigirProva(Elemento *o1, Elemento *o2) {
-  if (!getsym(inventario, "prova"))
-	puts("Não estou com a prova...");
-  else if (!getsym(inventario, "caneta"))
-	puts("preciso da ferramenta correta para  a correção!");
-  else {
-	puts("Pronto! Missão cumprida!\n"
-		 "A prova está corrigida, mas é melhor você não saber o resultado...\n"
-		 "*** FIM ***");
-	exit(0);
-  }
-}
-
-/* comportamento especial que depende do lugar */
-void GritaQuarto(Elemento *o1, Elemento *o2) {
-  puts("Psiuuuu!!!\nIsto é um quarto!!!!");
+  Pegar(&ouro, NULL);
 }
 
 
@@ -236,7 +166,6 @@ struct initfunc lfunc[] = {
   {"veja", Olhar },
   {"grite", Gritar },
   {"berre", Gritar },
-  {"corrija", Corrigir },
   {0, 0}
 };
 
@@ -249,15 +178,8 @@ struct initobj {
 /* Lista de objetos */
 struct initobj lobjs[] = {
   {"fogo",  &fogo},
-  {"gelo",  &gelo},
-  {"leprechaum", &lepre},
-  {"Kirkpatrick", &lepre},
-  {"lapis", &lapis},
-  {"caneta", &caneta},
-  {"hamster", &hamster},
-  {"prova", &prova},
-  {"vapor", &vapor},
-  { 0, 0}
+  {"ouro", &ouro},
+  { 0, 0 }
 };
 
 /* Para lugares */
@@ -268,8 +190,12 @@ struct initlug {
 
 /* Lista de lugares */
 struct initlug llugs[] = {
-  {"quarto",  &quarto},
-  {"sala",    &sala},
+  {"tendaRei",       &tendaRei},
+  {"assembleia",     &assembleia},
+  {"campoDeBatalha", &campoDeBatalha},
+  {"acampamento_tracios", &acampamento_tracios},
+  {"tenda_aquiles", &tenda_aquiles},
+  {"palacio_troia", &palacio_troia},
   { 0, 0}
 };
 
@@ -299,28 +225,12 @@ symrec*  init_table(symrec *sym_table)
     ptr = putsym(ptr, llugs[i].name, LUGAR,llugs[i].lug);
 
   /* Coloca os objetos nos lugares */
-  quarto.cont = putsym(quarto.cont, "fogo",       OBJ, &fogo);
-  quarto.cont = putsym(quarto.cont, "gelo",       OBJ, &gelo);
-  quarto.cont = putsym(quarto.cont, "leprechaum", OBJ, &lepre);
-  quarto.cont = putsym(quarto.cont, "lapis",  	  OBJ, &lapis);
-  quarto.cont = putsym(quarto.cont, "caneta", 	  OBJ, &caneta);
-
-  sala.cont = putsym(sala.cont, "prova",   OBJ, &prova);
-  sala.cont = putsym(sala.cont, "hamster", OBJ, &hamster);
-
-  /* coloca as saídas da sala, o quarto já tem */
-  sala.Det.lug.Saidas[3] = &quarto;
+  tendaRei.cont = putsym(tendaRei.cont, "ouro", OBJ, &ouro);
 
   /* Ajustes finais */
-  gelo.cont=    putsym(gelo.cont,    "pegue",   VERBO, PegarGelo);
-  fogo.cont=    putsym(fogo.cont,    "pegue",   VERBO, PegarFogo);
-  lepre.cont=   putsym(lepre.cont,   "jogue",   VERBO, JogarLeprechaum);
-  hamster.cont= putsym(hamster.cont, "jogue",   VERBO, JogarHamster);
-  quarto.cont=  putsym(quarto.cont,  "grite",   VERBO, GritaQuarto);
-  vapor.cont=   putsym(vapor.cont,   "pegue",   VERBO, PegarVapor);
-  prova.cont=   putsym(prova.cont,   "corrija", VERBO, CorrigirProva);
+  ouro.cont = putsym(ouro.cont,   "pegue", VERBO, Pegar);
 
-  Posic = &quarto;
+  Posic = &tendaRei;
   /* retorna a nova cabeça da lista */
   return ptr;
 }
